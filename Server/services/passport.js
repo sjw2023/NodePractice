@@ -5,6 +5,20 @@ const keys = require("../config/keys");
 
 const User = mongoose.model("users"); //load the model class from mongoDB
 
+passport.serializeUser((user, done) => {
+  //user here means user which is now using the connection, user that returns from passport.use callback
+  done(null, user.id); //user.id is the id that mongoDB assign to user, why we are using this ? think if we make app that can login with facebook google etc
+});
+
+passport.deserializeUser((id, done) => {
+  // deserializeUser function takes the function that has userid and callback done function.
+  //les turn id into mongoDBID
+  User.findById(id) // this function use search criteria as id
+    .then(user => {
+      done(null, user); // rememver done always taked error object and result
+    });
+});
+
 passport.use(
   new GoogleStrategy(
     {
