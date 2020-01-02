@@ -24,7 +24,8 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: "http://localhost:5000/auth/google/callback" // error happend 'bad request' -> it needs ful URL
+      callbackURL: "/auth/google/callback", // error happend 'bad request' -> it needs ful URL
+      proxy: true
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ googleId: profile.id }) // Check if useris already inside of the collection, It returns the promisses
