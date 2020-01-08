@@ -21,7 +21,7 @@ const Landing = () => <h2>Landing</h2>;
 const App = () => {
   return (
     // jaxs
-    <div>
+    <div className="container">
       <BrowserRouter>
         <div>
           <Header />
