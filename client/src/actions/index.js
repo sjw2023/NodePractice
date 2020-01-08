@@ -37,7 +37,12 @@ import { FETCH_USER } from "./types";
 ///////3. instead of .then promises we can use await and async
 ///// find the function which is containing promises and put async
 ///// and replace actual promise with await keyword
+
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/current_user");
-  dispatch({ type: FETCH_USER, payload: res });
+  dispatch({ type: FETCH_USER, payload: res.data });
 };
+
+//////4. more compressing.
+// export const fetchUser = () => async dispatch =>
+//   dispatch({ type: FETCH_USER, payload: await axios.get("/api/current_user") });
