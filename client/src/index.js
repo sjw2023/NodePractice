@@ -5,11 +5,12 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import "materialize-css/dist/css/materialize.min.css";
+import reduxThunk from "redux-thunk";
 
 import App from "./components/App";
 import reducers from "./reducers";
 
-const store = createStore(() => [], {}, applyMiddleware());
+const store = createStore(reducers, applyMiddleware(reduxThunk));
 //creating redux store
 // () => [], dummy arrow function that returns array
 //second argument will be used for initializing the first state of app.

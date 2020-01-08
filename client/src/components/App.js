@@ -1,5 +1,7 @@
-import React from "react"; //ES2015
+import React, { Component } from "react"; //ES2015
 import { BrowserRouter, Route } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "../actions";
 
 //BrowerRouter : the brain of the react router.
 //Route : set up the rule of the router.
@@ -18,20 +20,28 @@ const Landing = () => <h2>Landing</h2>;
 //Header will be showed no matter what happend, and we will do this by using Header it self.
 // the Contents of each component will be detemiened by Redux files.
 
-const App = () => {
-  return (
-    // jaxs
-    <div className="container">
-      <BrowserRouter>
-        <div>
-          <Header />
-          <Route exact={true} path="/" component={Landing} />
-          <Route exact={true} path="/surveys" component={Dashboard} />
-          <Route path="/surveys/new" component={SurveyNew} />
-        </div>
-      </BrowserRouter>
-    </div>
-  );
-};
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchUser();
+  }
+  render() {
+    return (
+      // jaxs
+      <div className="container">
+        <BrowserRouter>
+          <div>
+            <Header />
+            <Route exact={true} path="/" component={Landing} />
+            <Route exact={true} path="/surveys" component={Dashboard} />
+            <Route path="/surveys/new" component={SurveyNew} />
+          </div>
+        </BrowserRouter>
+      </div>
+    );
+  }
+}
 
-export default App;
+export default connect(
+  null,
+  actions
+)(App);
