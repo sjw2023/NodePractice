@@ -10,9 +10,10 @@ import * as actions from "../actions";
 //This dummy component will be functional component which returns h2
 // const Header = () => <h2>Header</h2>;
 import Header from "./Header"; // remove dummy Header and replace with Header.js
+import Landing from "./Landing";
 const Dashboard = () => <h2>Dashboard</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
-const Landing = () => <h2>Landing</h2>;
+
 //BrouwerRouter tag should have at most one child
 //Inside of BrowserRouter, here we are going to put rules of routing
 //path attribute match from the beginning so we should make rule to show exact one.
