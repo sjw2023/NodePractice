@@ -30,5 +30,22 @@ app.use(passport.session());
 require("./routes/authRoutes")(app); //This is using methods in authRoutes.js
 require("./routes/billingRoutes")(app);
 
+if (process.env.NOVE_ENV === "production") {
+  // this part will be executed only application is production
+  //Express will serve up production assets
+  //like our main.js, or main.css file
+  app.use(express.static("client/build")); //if any get request comes in for some route or some file or absolutely anything of application
+  // that we do not understand then look into client/build directory to find it.
+
+  //Express will serve up the index.html file
+  //if it doesn't recognize the route
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendfile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+  //it says if someone requte the route that we do not understand just serve in up to index.html
+  //toss the request to reacet side server.
+}
+
 const PORT = process.env.PORT || 5000; // if there isn't port from heroku use 5000
 app.listen(PORT);
