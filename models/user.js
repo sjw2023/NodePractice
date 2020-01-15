@@ -6,7 +6,8 @@ const Schema = mongoose.Schema;
     Creating the schema of model instance which we are going to put into database
 */
 const userSchema = new Schema({
-  googleId: String
+  googleId: String,
+  credit: { type: Number, default: 0 }
 });
 
 /*
