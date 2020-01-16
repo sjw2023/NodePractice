@@ -30,7 +30,7 @@ app.use(passport.session());
 require("./routes/authRoutes")(app); //This is using methods in authRoutes.js
 require("./routes/billingRoutes")(app);
 
-if (process.env.NOVE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
   // this part will be executed only application is production
   //Express will serve up production assets
   //like our main.js, or main.css file
