@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 
 require("./models/user"); // This should ba called first since it creates model class abd passport is using that class
+require("./models/Survey");
 require("./services/passport");
 
 mongoose.connect(keys.mongoURI); //Connect with database with URI of mongoDB Atlas instance
