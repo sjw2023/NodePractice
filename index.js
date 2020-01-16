@@ -41,7 +41,7 @@ if (process.env.NOVE_ENV === "production") {
   //if it doesn't recognize the route
   const path = require("path");
   app.get("*", (req, res) => {
-    res.sendfile(path.resolve(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
   //it says if someone requte the route that we do not understand just serve in up to index.html
   //toss the request to reacet side server.
