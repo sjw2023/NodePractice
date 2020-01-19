@@ -5,18 +5,19 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 
+//////////////////////////
+//Setting up the models for MongoDB.
 require("./models/user"); // This should ba called first since it creates model class abd passport is using that class
 require("./models/Survey");
 require("./services/passport");
-
-mongoose.connect(keys.mongoURI); //Connect with database with URI of mongoDB Atlas instance
+//Connect with database with URI of mongoDB Atlas instance
+mongoose.connect(keys.mongoURI);
 
 const app = express(); //Creating Wep application
 
 //This will call all the middlewares whenever it request requested.
-
+//Setting up the middlewares
 app.use(bodyParser.json());
-
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000, // I want this cookie last for 30days
@@ -24,13 +25,20 @@ app.use(
   })
 ); //going to tell express that we need to add cookie
 
+////////////////////////
 //To make passport use cookieKey
+//Wire up express with passport.
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Setting up the Routes.
 require("./routes/authRoutes")(app); //This is using methods in authRoutes.js
 require("./routes/billingRoutes")(app);
+require("./routes/surveyRoutes")(app);
 
+//This wiil be used by heroku since it only starts the express server.
+//This is making possible to express server to route react server side.
+//Whenever heroku requests react side files or API express routes user to the index.html and from there user can gets another routing such as open /survet etc.
 if (process.env.NODE_ENV === "production") {
   // this part will be executed only application is production
   //Express will serve up production assets
